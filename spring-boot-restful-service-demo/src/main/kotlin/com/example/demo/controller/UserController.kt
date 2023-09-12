@@ -17,7 +17,9 @@ class UserController(val userService: UserService) {
 
     @PatchMapping("/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun update(@RequestBody user: User) = userService.update(user)
+    fun update(@RequestBody user: User) {
+        user.id?.let { userService.update(user) }
+    }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
