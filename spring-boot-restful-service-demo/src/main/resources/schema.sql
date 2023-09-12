@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+    id BIGINT AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT,
+    PRIMARY KEY (id)
+);
