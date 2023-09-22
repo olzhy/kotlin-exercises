@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.9.10"
+    application
 }
 
 java {
@@ -25,6 +26,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.10.0")
+}
+
+application {
+    mainClass.set("com.example.demo.DemoApplicationKt")
 }
 
 tasks.withType<KotlinCompile> {
