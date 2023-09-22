@@ -43,7 +43,7 @@ val timingFilter = Filter { next: HttpHandler ->
         val start = System.currentTimeMillis()
         val resp: Response = next(req)
         val timeElapsed = System.currentTimeMillis() - start
-        println("[timing filter] request to ${req.uri} took ${timeElapsed}ms")
+        println("[timing filter] ${req.method} ${req.uri} took ${timeElapsed}ms")
         resp
     }
 }
