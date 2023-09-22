@@ -34,7 +34,7 @@ class UserController @Inject constructor(
                 returning(OK, usersLens to listOf(User(1, "Larry", 28)))
             } bindContract GET to ::listAll,
 
-            // getUserById
+            // getById
             "/users" / Path.long().of("id") meta {
                 summary = "get user by id"
                 returning(OK, userLens to User(1, "Larry", 28))
