@@ -71,7 +71,7 @@ class UserController @Inject constructor(
     }
 
     private fun getById(req: Request, id: Long): Response {
-        val user = userService.getUserById(id)
+        val user = userService.getById(id)
         return user?.let {
             Response(OK).with(userLens of it)
         } ?: ErrorCodes.USER_NOT_FOUND.toResponse()
@@ -79,7 +79,7 @@ class UserController @Inject constructor(
 
     private fun update(req: Request, user: User): Response {
         // exists?
-        userService.getUserById(user.id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
+        userService.getById(user.id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
 
         // update
         userService.update(user)
@@ -88,7 +88,7 @@ class UserController @Inject constructor(
 
     private fun save(req: Request, user: User): Response {
         // exists?
-        val userStored = userService.getUserById(user.id)
+        val userStored = userService.getById(user.id)
         if (null != userStored) {
             return ErrorCodes.USER_ALREADY_EXISTS.toResponse()
         }
@@ -100,7 +100,7 @@ class UserController @Inject constructor(
 
     private fun deleteById(req: Request, id: Long): Response {
         // exists?
-        userService.getUserById(id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
+        userService.getById(id) ?: return ErrorCodes.USER_NOT_FOUND.toResponse()
 
         // delete
         userService.deleteById(id)

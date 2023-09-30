@@ -4,7 +4,7 @@ import com.example.demo.model.User
 
 interface UserService {
     fun listAll(): List<User>
-    fun getUserById(id: Long): User?
+    fun getById(id: Long): User?
     fun update(user: User)
     fun save(user: User)
     fun deleteById(id: Long)
@@ -21,7 +21,7 @@ class DefaultUserServiceImpl : UserService {
         return fakeUsers
     }
 
-    override fun getUserById(id: Long): User? {
+    override fun getById(id: Long): User? {
         return fakeUsers.find { it.id == id }
     }
 
@@ -33,7 +33,7 @@ class DefaultUserServiceImpl : UserService {
     }
 
     override fun save(user: User) {
-        getUserById(user.id) ?: fakeUsers.add(user)
+        getById(user.id) ?: fakeUsers.add(user)
     }
 
     override fun deleteById(id: Long) {
