@@ -1,6 +1,6 @@
-package com.example.demo.plugins
+package com.example.demo.plugin
 
-import com.example.demo.routes.userRouting
+import com.example.demo.route.userRouting
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 

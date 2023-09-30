@@ -1,4 +1,4 @@
-package com.example.demo.routes
+package com.example.demo.route
 
 import com.example.demo.conf.kodein
 import com.example.demo.model.User
