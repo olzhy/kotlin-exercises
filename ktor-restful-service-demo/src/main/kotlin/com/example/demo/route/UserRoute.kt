@@ -1,5 +1,6 @@
 package com.example.demo.route
 
+import com.example.demo.code.ErrorCodes
 import com.example.demo.conf.kodein
 import com.example.demo.model.User
 import com.example.demo.service.UserService
@@ -24,9 +25,9 @@ fun Route.userRouting() {
         get(Regex("/(?<id>\\d+)")) {
             val id = call.parameters["id"]!!.toLong()
 
-            val user = userService.getById(id) ?: return@get call.respondText(
-                    "user not exists",
-                    status = HttpStatusCode.NotFound
+            val user = userService.getById(id) ?: return@get call.respond(
+                    ErrorCodes.USER_NOT_FOUND.status,
+                    ErrorCodes.USER_NOT_FOUND.toErrorResponse()
             )
             call.respond(user)
         }
@@ -34,9 +35,9 @@ fun Route.userRouting() {
         // update
         patch {
             val user = call.receive<User>()
-            userService.getById(user.id) ?: return@patch call.respondText(
-                    "user not exists",
-                    status = HttpStatusCode.NotFound
+            userService.getById(user.id) ?: return@patch call.respond(
+                    ErrorCodes.USER_NOT_FOUND.status,
+                    ErrorCodes.USER_NOT_FOUND.toErrorResponse()
             )
 
             userService.update(user)
@@ -47,9 +48,9 @@ fun Route.userRouting() {
         post {
             val user = call.receive<User>()
             userService.getById(user.id)?.let {
-                return@post call.respondText(
-                        "user already exists",
-                        status = HttpStatusCode.NotFound
+                return@post call.respond(
+                        ErrorCodes.USER_ALREADY_EXISTS.status,
+                        ErrorCodes.USER_ALREADY_EXISTS.toErrorResponse()
                 )
             }
 
@@ -60,9 +61,9 @@ fun Route.userRouting() {
         // delete by id
         delete(Regex("/(?<id>\\d+)")) {
             val id = call.parameters["id"]!!.toLong()
-            userService.getById(id) ?: return@delete call.respondText(
-                    "user not exists",
-                    status = HttpStatusCode.NotFound
+            userService.getById(id) ?: return@delete call.respond(
+                    ErrorCodes.USER_NOT_FOUND.status,
+                    ErrorCodes.USER_NOT_FOUND.toErrorResponse()
             )
 
             userService.deleteById(id)
